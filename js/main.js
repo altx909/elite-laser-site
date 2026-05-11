@@ -32,8 +32,8 @@
     // Hover states
     const hoverTargets = 'a, button, .service-card, .why-pillar, .about-pillar, .testimonial-card';
     document.querySelectorAll(hoverTargets).forEach(el => {
-      el.addEventListener('mouseenter', () => ring.classList.add('hover'));
-      el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+      el.addEventListener('mouseenter', () => ring.classList.add('hov'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('hov'));
     });
   }
 

@@ -72,6 +72,7 @@ nav.sc{background:rgba(253,252,251,0.96);backdrop-filter:blur(20px);-webkit-back
 .nav-toggle{display:none;flex-direction:column;gap:5px;width:24px;padding:3px 0;cursor:none}
 .nav-toggle span{display:block;height:1px;background:var(--ink);transition:all .3s}
 @media(max-width:1100px){
+  .hero{background:var(--ink)}
   nav:not(.sc) .logo-text{color:var(--white)}
   nav:not(.sc) .nav-phone{color:rgba(255,255,255,0.55)}
   nav:not(.sc) .nav-book{border-color:rgba(255,255,255,0.4);color:var(--white)}
@@ -253,19 +254,19 @@ nav.sc{background:rgba(253,252,251,0.96);backdrop-filter:blur(20px);-webkit-back
 .testi-loc{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:.08em;text-transform:uppercase}
 
 /* ══ CTA ══ */
-.cta{padding:clamp(100px,12vw,160px) 0;background:var(--white);text-align:center;position:relative;overflow:hidden}
-.cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(232,98,58,0.06) 0%,transparent 65%);pointer-events:none}
-.cta::after{content:'';position:absolute;top:50%;left:58%;transform:translate(-50%,-50%);width:420px;height:420px;background:radial-gradient(circle,rgba(107,122,232,0.04) 0%,transparent 65%);pointer-events:none}
-.cta-inner{max-width:var(--max);margin:0 auto;padding:0 var(--g);position:relative;z-index:1}
+.cta{padding:clamp(100px,12vw,160px) 0;background:var(--ink);text-align:center;position:relative;overflow:hidden}
+.cta-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(0.28) saturate(0.15);z-index:0}
+.cta-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(232,98,58,0.18) 0%,rgba(26,18,16,0.6) 60%,rgba(107,122,232,0.08) 100%)}
+.cta-inner{max-width:var(--max);margin:0 auto;padding:0 var(--g);position:relative;z-index:2}
 .cta-eyebrow{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px}
 .cta-eyebrow-line{width:28px;height:1px;background:var(--fire);flex-shrink:0}
 .cta-eyebrow-text{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--fire)}
-.cta-h{font-family:var(--fd);font-size:clamp(48px,6.5vw,96px);font-weight:300;line-height:.92;letter-spacing:-.02em;color:var(--ink);margin-bottom:28px}
+.cta-h{font-family:var(--fd);font-size:clamp(48px,6.5vw,96px);font-weight:300;line-height:.92;letter-spacing:-.02em;color:var(--white);margin-bottom:28px}
 .cta-h em{font-style:italic;color:var(--fire)}
-.cta-sub{font-size:15px;color:var(--mid);line-height:1.85;max-width:400px;margin:0 auto 52px}
+.cta-sub{font-size:15px;color:rgba(255,255,255,0.6);line-height:1.85;max-width:400px;margin:0 auto 52px}
 .cta-btns{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
-.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;border:1px solid var(--border);color:var(--mid);font-family:var(--fb);font-size:12px;letter-spacing:.1em;text-transform:uppercase;transition:border-color .25s,color .25s}
-.btn-outline:hover{border-color:var(--ink);color:var(--ink)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;border:1px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.7);font-family:var(--fb);font-size:12px;letter-spacing:.1em;text-transform:uppercase;transition:border-color .25s,color .25s}
+.btn-outline:hover{border-color:var(--white);color:var(--white)}
 
 /* ══ CONTACT ══ */
 .contact{padding:clamp(80px,10vw,130px) 0;background:var(--off);border-top:1px solid var(--border)}
@@ -636,6 +637,8 @@ footer{background:var(--ink);padding:72px 0 40px}
 
 <!-- CTA -->
 <section class="cta">
+  <img class="cta-bg-img" src="cta-bg.png" alt=""/>
+  <div class="cta-overlay"></div>
   <div class="cta-inner">
     <div class="cta-eyebrow rv"><div class="cta-eyebrow-line"></div><span class="cta-eyebrow-text">Ready to Begin?</span><div class="cta-eyebrow-line"></div></div>
     <h2 class="cta-h rv d1">Ready for your<br/><em>best skin?</em></h2>
@@ -866,11 +869,16 @@ if(canvas){
       }
     }
     if(mobileBg){
+      // fade to dark, swap, fade back — no white flash
+      mobileBg.style.transition='opacity 0.6s ease';
       mobileBg.style.opacity='0';
       setTimeout(function(){
         mobileBg.src=heroSrcs[next];
-        mobileBg.style.opacity='1';
-      },300);
+        // small delay to let browser load src before fading in
+        setTimeout(function(){
+          mobileBg.style.opacity='1';
+        },80);
+      },620);
     }
   }
 

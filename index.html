@@ -111,8 +111,8 @@ nav.sc{background:rgba(253,252,251,0.96);backdrop-filter:blur(20px);-webkit-back
 .nav-toggle{display:none;flex-direction:column;gap:5px;width:24px;padding:3px 0;cursor:none}
 .nav-toggle span{display:block;height:1px;background:var(--ink);transition:all .3s}
 @media(max-width:1100px){
-  .hero{background:var(--ink)}
-  .hero-left{justify-content:center;padding-top:clamp(12px,3dvh,28px);padding-bottom:clamp(32px,5dvh,52px);min-height:100dvh}
+  .hero{background:var(--ink);min-height:auto;grid-template-columns:1fr}
+  .hero-left{justify-content:flex-start;padding:100px clamp(20px,5vw,40px) 48px !important;min-height:auto}
   nav:not(.sc) .logo-text{color:var(--white)}
   nav:not(.sc) .nav-phone{color:rgba(255,255,255,0.55)}
   nav:not(.sc) .nav-book{border-color:rgba(255,255,255,0.4);color:var(--white)}
@@ -564,6 +564,8 @@ footer{background:var(--ink);padding:72px 0 40px}
       <li><a href="#services">Services</a></li>
       <li><a href="#process">Process</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="https://srtbarbershop.com" target="_blank" rel="noopener" style="color:var(--mid)">SRT Barbershop</a></li>
+      <li><a href="https://savagehair.ca" target="_blank" rel="noopener" style="color:var(--mid)">Hair Products</a></li>
     </ul>
     <div class="na">
       <a class="nav-phone" href="tel:3069864004">306-986-4004</a>
@@ -916,7 +918,10 @@ footer{background:var(--ink);padding:72px 0 40px}
       </div>
     </div>
     <div class="foot-bottom">
-      <p class="foot-copy">&copy; 2026 Elite Laser Services. All rights reserved. Saskatoon, Saskatchewan.</p>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <p class="foot-copy">&copy; 2026 Elite Laser Services. All rights reserved. Saskatoon, Saskatchewan.</p>
+        <p class="foot-copy" style="opacity:0.6">Designed by <span style="font-family:var(--fd);font-size:13px;font-weight:400;background:linear-gradient(90deg,var(--fire) 0%,var(--fire) 30%,var(--blue) 50%,var(--fire) 70%,var(--fire) 100%);background-size:300% 100%;background-position:0% 50%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:liquidFire 4s ease-in-out infinite">AltX Media</span></p>
+      </div>
       <div class="foot-socials">
         <a class="soc-link" href="https://www.facebook.com/profile.php?id=61588055475449" target="_blank" aria-label="Facebook"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M8.5 1H10V3H8.5C8.22 3 8 3.22 8 3.5V5H10V7H8V13H6V7H4V5H6V3.5C6 2.12 7.12 1 8.5 1Z" fill="currentColor"/></svg></a>
         <a class="soc-link" href="https://www.instagram.com/elite_laserservice" target="_blank" aria-label="Instagram"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="3" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="7" r="2.5" stroke="currentColor" stroke-width="1.2"/><circle cx="10.5" cy="3.5" r="0.6" fill="currentColor"/></svg></a>
@@ -1145,9 +1150,26 @@ var tog=document.getElementById('tog'),nl=document.querySelector('.nl');
 if(tog&&nl){
   tog.addEventListener('click',function(){
     var open=nl.style.display==='flex';
-    nl.style.cssText=open?'':'display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:rgba(253,252,251,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:36px 20px;gap:24px;border-bottom:1px solid #EDE5E1;z-index:199;box-shadow:0 8px 32px rgba(26,18,16,0.08)';
-  });
-  nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nl.style.cssText='';});});
+    if(open){
+        nl.style.cssText='';
+        var ob=document.getElementById('mob-brand'); if(ob) ob.remove();
+      } else {
+        nl.style.cssText='display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:rgba(253,252,251,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:36px 20px 80px;gap:24px;border-bottom:1px solid #EDE5E1;z-index:199;box-shadow:0 8px 32px rgba(26,18,16,0.08)';
+        if(!nl.querySelector('.mob-sister')){
+          var sep=document.createElement('li');sep.style.cssText='height:1px;background:#EDE5E1;margin:4px 0';nl.appendChild(sep);
+          var srt=document.createElement('li');srt.className='mob-sister';srt.innerHTML='<a href="https://srtbarbershop.com" target="_blank" rel="noopener" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#AFA5A0">SRT Barbershop &rarr;</a>';nl.appendChild(srt);
+          var hair=document.createElement('li');hair.className='mob-sister';hair.innerHTML='<a href="https://savagehair.ca" target="_blank" rel="noopener" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#AFA5A0">Hair Products &rarr;</a>';nl.appendChild(hair);
+        }
+        if(!document.getElementById('mob-brand')){
+          var brand=document.createElement('div');
+          brand.id='mob-brand';
+          brand.style.cssText='position:fixed;bottom:0;left:0;right:0;padding:14px 20px;background:rgba(253,252,251,0.98);border-top:1px solid #EDE5E1;z-index:200;text-align:center';
+          brand.innerHTML='<span style="font-size:11px;letter-spacing:.06em;color:#AFA5A0;font-family:DM Sans,sans-serif">Designed by <\/span><span style="font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-weight:400;background:linear-gradient(90deg,#E8623A 0%,#E8623A 30%,#6B7AE8 50%,#E8623A 70%,#E8623A 100%);background-size:300% 100%;background-position:0% 50%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:liquidFire 4s ease-in-out infinite">AltX Media<\/span>';
+          document.body.appendChild(brand);
+        }
+      }
+    });
+  nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nl.style.cssText='';var b=document.getElementById('mob-brand');if(b)b.remove();});});
 }
 
 /* ── SMOOTH SCROLL ── */

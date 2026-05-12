@@ -139,14 +139,14 @@ nav.sc{background:rgba(253,252,251,0.96);backdrop-filter:blur(20px);-webkit-back
 @keyframes up{to{opacity:1;transform:none}}
 @keyframes fadein{to{opacity:1}}
 
-/* ══ DATA STRIP ══ */
-.data-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:18px var(--g);background:var(--white)}
-.ds-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:center;gap:clamp(12px,3vw,56px);flex-wrap:wrap}
-.ds-item{display:flex;align-items:center;gap:9px}
-.ds-dot{width:5px;height:5px;background:var(--fire);border-radius:50%;flex-shrink:0}
-.ds-dot.blue{background:var(--blue)}
-.ds-text{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.ds-sep{width:1px;height:14px;background:var(--border);flex-shrink:0}
+/* ══ TICKER ══ */
+.ticker{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--white);overflow:hidden;white-space:nowrap;position:relative}
+.ticker-track{display:inline-flex;animation:ticker 22s linear infinite}
+.ticker-track:hover{animation-play-state:paused}
+.ticker-item{display:inline-flex;align-items:center;gap:10px;padding:16px 40px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.ticker-dot{width:5px;height:5px;border-radius:50%;background:var(--fire);flex-shrink:0}
+.ticker-dot.blue{background:var(--blue)}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* ══ SHARED ══ */
 .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--g)}
@@ -357,7 +357,7 @@ footer{background:var(--ink);padding:72px 0 40px}
   .foot-top{grid-template-columns:1fr}
   .f-row{grid-template-columns:1fr}
   .f-group+.f-group{border-left:none}
-  .ds-sep{display:none}
+
   .ds-inner{gap:12px;justify-content:flex-start;padding:0 4px}
 }
 /* hide mobile bg on desktop */
@@ -398,8 +398,9 @@ footer{background:var(--ink);padding:72px 0 40px}
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <!-- mobile bg — actual img tag, not CSS pseudo -->
-  <img class="hero-mobile-bg" src="hero.png" alt=""/>
+  <!-- mobile bg — actual img tag -->
+  <img class="hero-mobile-bg" id="hero-mobile-bg" src="hero.png" alt="" style="transition:opacity 1.4s ease"/>
+  <div id="mobile-laser" style="position:absolute;top:0;left:-2px;width:1.5px;height:100%;background:linear-gradient(to bottom,transparent,#D42020 50%,transparent);opacity:0;z-index:3;box-shadow:0 0 10px rgba(212,32,32,0.8);pointer-events:none;transition:none"></div>
 
   <div class="hero-left">
     <div class="hero-eyebrow">
@@ -434,18 +435,11 @@ footer{background:var(--ink);padding:72px 0 40px}
   </div>
 </section>
 
-<!-- DATA STRIP -->
-<div class="data-strip">
-  <div class="ds-inner">
-    <div class="ds-item"><div class="ds-dot"></div><span class="ds-text">SharpLight Technology</span></div>
-    <div class="ds-sep"></div>
-    <div class="ds-item"><div class="ds-dot blue"></div><span class="ds-text">All Skin Types</span></div>
-    <div class="ds-sep"></div>
-    <div class="ds-item"><div class="ds-dot"></div><span class="ds-text">Pain-Free Experience</span></div>
-    <div class="ds-sep"></div>
-    <div class="ds-item"><div class="ds-dot blue"></div><span class="ds-text">Free Consultation</span></div>
-    <div class="ds-sep"></div>
-    <div class="ds-item"><div class="ds-dot"></div><span class="ds-text">7 Treatments Available</span></div>
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-item"><div class="ticker-dot"></div><span>SharpLight Technology</span></div><div class="ticker-item"><div class="ticker-dot blue"></div><span>All Skin Types</span></div><div class="ticker-item"><div class="ticker-dot"></div><span>Pain-Free Experience</span></div><div class="ticker-item"><div class="ticker-dot blue"></div><span>Free Consultation</span></div><div class="ticker-item"><div class="ticker-dot"></div><span>7 Treatments Available</span></div><div class="ticker-item"><div class="ticker-dot blue"></div><span>Laser Hair Removal</span></div><div class="ticker-item"><div class="ticker-dot"></div><span>Tattoo Removal</span></div><div class="ticker-item"><div class="ticker-dot blue"></div><span>Skin Rejuvenation</span></div><div class="ticker-item"><div class="ticker-dot"></div><span>Carbon Laser Peel</span></div><div class="ticker-item"><div class="ticker-dot blue"></div><span>Body Contouring</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div><span>SharpLight Technology</span></div><div class="ticker-item"><div class="ticker-dot blue"></div><span>All Skin Types</span></div><div class="ticker-item"><div class="ticker-dot"></div><span>Pain-Free Experience</span></div><div class="ticker-item"><div class="ticker-dot blue"></div><span>Free Consultation</span></div><div class="ticker-item"><div class="ticker-dot"></div><span>7 Treatments Available</span></div><div class="ticker-item"><div class="ticker-dot blue"></div><span>Laser Hair Removal</span></div><div class="ticker-item"><div class="ticker-dot"></div><span>Tattoo Removal</span></div><div class="ticker-item"><div class="ticker-dot blue"></div><span>Skin Rejuvenation</span></div><div class="ticker-item"><div class="ticker-dot"></div><span>Carbon Laser Peel</span></div><div class="ticker-item"><div class="ticker-dot blue"></div><span>Body Contouring</span></div>
   </div>
 </div>
 
@@ -827,14 +821,41 @@ if(canvas){
   // hero image crossfade — swap at laser midpoint
   var heroImg1=document.getElementById('hero-img-1');
   var heroImg2=document.getElementById('hero-img-2');
-  var mobileBg=document.querySelector('.hero-mobile-bg');
+  var mobileBg=document.getElementById('hero-mobile-bg');
+  var mobileLaser=document.getElementById('mobile-laser');
+
+  function fireMobileLaser(onMidpoint){
+    if(!mobileLaser)return;
+    var heroSection=document.querySelector('.hero');
+    if(!heroSection)return;
+    var w=heroSection.offsetWidth;
+    var pos=0;
+    var speed=w/90;
+    var triggered=false;
+    mobileLaser.style.transition='none';
+    mobileLaser.style.left='-2px';
+    mobileLaser.style.opacity='1';
+    function step(){
+      pos+=speed;
+      mobileLaser.style.left=pos+'px';
+      if(!triggered&&pos>w*0.28){
+        triggered=true;
+        if(onMidpoint) onMidpoint();
+      }
+      if(pos<w+10){
+        requestAnimationFrame(step);
+      } else {
+        mobileLaser.style.opacity='0';
+      }
+    }
+    requestAnimationFrame(step);
+  }
   var heroIdx=0;
   var heroSrcs=['hero.png','hero2.png'];
 
   function swapHero(){
     heroIdx=(heroIdx+1)%heroSrcs.length;
     var next=heroIdx;
-    var prev=heroIdx===0?1:0;
     if(heroImg1&&heroImg2){
       if(next===0){
         heroImg1.style.opacity='1';
@@ -844,7 +865,20 @@ if(canvas){
         heroImg2.style.opacity='1';
       }
     }
-    if(mobileBg) mobileBg.src=heroSrcs[next];
+    if(mobileBg){
+      mobileBg.style.opacity='0';
+      setTimeout(function(){
+        mobileBg.src=heroSrcs[next];
+        mobileBg.style.opacity='1';
+      },300);
+    }
+  }
+
+  // mobile: fire laser then swap
+  function fireMobileHero(){
+    fireMobileLaser(function(){
+      swapHero();
+    });
   }
 
   // patch fireLaser to trigger swap at midpoint
@@ -875,7 +909,7 @@ if(canvas){
       ctx.beginPath();ctx.moveTo(laserX,0);ctx.lineTo(laserX,canvas.height);ctx.stroke();
       ctx.restore();
       // swap at midpoint
-      if(!swapped&&laserX>canvas.width*0.48){
+      if(!swapped&&laserX>canvas.width*0.28){
         swapped=true;
         swapHero();
       }
@@ -896,10 +930,17 @@ if(canvas){
     requestAnimationFrame(step);
   };
 
+  var isMobile=window.innerWidth<=1100;
   setTimeout(function(){
-    fireLaser();
-    setInterval(fireLaser,6000);
+    if(canvas&&!isMobile){
+      fireLaser();
+      setInterval(fireLaser,6000);
+    } else {
+      fireMobileHero();
+      setInterval(fireMobileHero,6000);
+    }
   },1200);
+  window.addEventListener('resize',function(){isMobile=window.innerWidth<=1100;},{passive:true});
 }
 
 /* ── NAV ── */

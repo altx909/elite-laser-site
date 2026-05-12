@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-CA">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Elite Laser Services — Advanced Skin & Laser Clinic, Saskatoon</title>
-<meta name="description" content="Advanced skin and laser clinic in Saskatoon. Medical-grade SharpLight technology. Free consultation."/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+<!-- Primary SEO -->
+<title>Elite Laser Services — Advanced Skin &amp; Laser Clinic Saskatoon | SharpLight Technology</title>
+<meta name="description" content="Elite Laser Services in Saskatoon offers advanced laser treatments including laser hair removal, tattoo removal, skin rejuvenation, acne treatment, carbon laser peel, and body contouring. Medical-grade SharpLight technology. Free consultation."/>
+<meta name="keywords" content="laser clinic Saskatoon, laser hair removal Saskatoon, tattoo removal Saskatoon, skin rejuvenation Saskatoon, acne laser treatment, carbon laser peel, body contouring, SharpLight laser, Elite Laser Services"/>
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
+<meta name="author" content="Elite Laser Services"/>
+<meta name="geo.region" content="CA-SK"/>
+<meta name="geo.placename" content="Saskatoon"/>
+<meta name="geo.position" content="52.1332;-106.6700"/>
+<meta name="ICBM" content="52.1332, -106.6700"/>
+<link rel="canonical" href="https://elitelaserservice.ca/"/>
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://elitelaserservice.ca/"/>
+<meta property="og:title" content="Elite Laser Services — Advanced Skin &amp; Laser Clinic Saskatoon"/>
+<meta property="og:description" content="Medical-grade SharpLight laser treatments in Saskatoon. Hair removal, tattoo removal, skin rejuvenation, and more. Free consultation."/>
+<meta property="og:image" content="https://elitelaserservice.ca/hero.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:locale" content="en_CA"/>
+<meta property="og:site_name" content="Elite Laser Services"/>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Elite Laser Services — Advanced Skin &amp; Laser Clinic Saskatoon"/>
+<meta name="twitter:description" content="Medical-grade SharpLight laser treatments in Saskatoon. Free consultation."/>
+<meta name="twitter:image" content="https://elitelaserservice.ca/hero.png"/>
+
+<!-- Favicon placeholder -->
+<link rel="icon" type="image/png" href="/favicon.png"/>
+<link rel="apple-touch-icon" href="/favicon.png"/>
+<meta name="theme-color" content="#1A1210"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+<!-- Performance -->
+<link rel="preload" href="hero.png" as="image"/>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
@@ -73,6 +112,7 @@ nav.sc{background:rgba(253,252,251,0.96);backdrop-filter:blur(20px);-webkit-back
 .nav-toggle span{display:block;height:1px;background:var(--ink);transition:all .3s}
 @media(max-width:1100px){
   .hero{background:var(--ink)}
+  .hero-left{justify-content:center;padding-top:clamp(20px,4vh,40px);padding-bottom:clamp(40px,6vh,60px);min-height:100vh}
   nav:not(.sc) .logo-text{color:var(--white)}
   nav:not(.sc) .nav-phone{color:rgba(255,255,255,0.55)}
   nav:not(.sc) .nav-book{border-color:rgba(255,255,255,0.4);color:var(--white)}
@@ -256,7 +296,30 @@ nav.sc{background:rgba(253,252,251,0.96);backdrop-filter:blur(20px);-webkit-back
 /* ══ CTA ══ */
 .cta{padding:clamp(100px,12vw,160px) 0;background:var(--ink);text-align:center;position:relative;overflow:hidden}
 .cta-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(0.28) saturate(0.15);z-index:0}
-.cta-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(232,98,58,0.18) 0%,rgba(26,18,16,0.6) 60%,rgba(107,122,232,0.08) 100%)}
+.cta-overlay{position:absolute;inset:0;z-index:1;background:rgba(26,18,16,0.52)}
+.cta-light-leak{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(105deg,
+    transparent 0%,
+    rgba(232,98,58,0.0) 20%,
+    rgba(232,98,58,0.22) 38%,
+    rgba(240,120,60,0.32) 50%,
+    rgba(232,98,58,0.18) 62%,
+    rgba(232,98,58,0.0) 80%,
+    transparent 100%
+  );
+  background-size:300% 100%;
+  background-position:150% 0;
+  animation:lightleak 7s ease-in-out infinite;
+}
+@keyframes lightleak{
+  0%{background-position:200% 0;opacity:0}
+  10%{opacity:1}
+  45%{background-position:-20% 0;opacity:1}
+  55%{background-position:-20% 0;opacity:1}
+  90%{background-position:200% 0;opacity:1}
+  100%{background-position:200% 0;opacity:0}
+}
 .cta-inner{max-width:var(--max);margin:0 auto;padding:0 var(--g);position:relative;z-index:2}
 .cta-eyebrow{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px}
 .cta-eyebrow-line{width:28px;height:1px;background:var(--fire);flex-shrink:0}
@@ -364,6 +427,88 @@ footer{background:var(--ink);padding:72px 0 40px}
 /* hide mobile bg on desktop */
 .hero-mobile-bg{display:none}
 </style>
+
+<!-- Structured Data — Local Business -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "MedicalBusiness", "HealthAndBeautyBusiness"],
+  "@id": "https://elitelaserservice.ca/#business",
+  "name": "Elite Laser Services",
+  "description": "Advanced skin and laser clinic in Saskatoon offering medical-grade SharpLight laser treatments including laser hair removal, tattoo removal, skin rejuvenation, acne treatment, carbon laser peel, facial contouring, and body contouring.",
+  "url": "https://elitelaserservice.ca",
+  "telephone": "+13069864004",
+  "email": "info@elitelaserservice.ca",
+  "image": "https://elitelaserservice.ca/hero.png",
+  "priceRange": "$$",
+  "currenciesAccepted": "CAD",
+  "paymentAccepted": "Cash, Credit Card, Debit",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "106 419 Willowgrove Square",
+    "addressLocality": "Saskatoon",
+    "addressRegion": "SK",
+    "postalCode": "S7W 8B8",
+    "addressCountry": "CA"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 52.1332,
+    "longitude": -106.6700
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "09:30",
+      "closes": "18:30"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "09:30",
+      "closes": "18:00"
+    }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Laser & Skin Treatments",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Laser Hair Removal", "url": "https://elitelaserservice.ca/services/laser-hair-removal"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Tattoo Removal", "url": "https://elitelaserservice.ca/services/tattoo-removal"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Skin Rejuvenation", "url": "https://elitelaserservice.ca/services/skin-rejuvenation"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Acne Treatment", "url": "https://elitelaserservice.ca/services/acne-treatment"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Carbon Correcting Laser Peel", "url": "https://elitelaserservice.ca/services/carbon-laser-peel"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Facial Contouring", "url": "https://elitelaserservice.ca/services/facial-contouring"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Body Contouring", "url": "https://elitelaserservice.ca/services/body-contouring"}}
+    ]
+  },
+  "sameAs": [
+    "https://www.facebook.com/profile.php?id=61588055475449",
+    "https://www.instagram.com/elite_laserservice"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "reviewCount": "3",
+    "bestRating": "5"
+  }
+}
+</script>
+<!-- FAQ Schema for AI Searchability -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What laser treatments does Elite Laser Services offer in Saskatoon?", "acceptedAnswer": {"@type": "Answer", "text": "Elite Laser Services offers laser hair removal, tattoo removal, skin rejuvenation, acne treatment, carbon correcting laser peel, facial contouring, and body contouring using medical-grade SharpLight technology."}},
+    {"@type": "Question", "name": "Is the consultation free at Elite Laser Services?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Elite Laser Services offers a completely free initial consultation with no commitment required."}},
+    {"@type": "Question", "name": "What technology does Elite Laser Services use?", "acceptedAnswer": {"@type": "Answer", "text": "Elite Laser Services uses SharpLight medical-grade laser systems, trusted by clinics worldwide, capable of treating all skin types safely and effectively."}},
+    {"@type": "Question", "name": "Where is Elite Laser Services located?", "acceptedAnswer": {"@type": "Answer", "text": "Elite Laser Services is located at 106 419 Willowgrove Square, Saskatoon, SK S7W 8B8. Call 306-986-4004 to book."}},
+    {"@type": "Question", "name": "Is laser hair removal painful?", "acceptedAnswer": {"@type": "Answer", "text": "Elite Laser Services uses SharpLight technology designed for a pain-free experience across all skin types, with minimal discomfort during treatment."}}
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -398,7 +543,7 @@ footer{background:var(--ink);padding:72px 0 40px}
 </nav>
 
 <!-- HERO -->
-<section class="hero" id="home">
+<section class="hero" id="home" aria-label="Elite Laser Services — Saskatoon's Advanced Laser Clinic">
   <!-- mobile bg — actual img tag -->
   <img class="hero-mobile-bg" id="hero-mobile-bg" src="hero.png" alt="" style="transition:opacity 1.4s ease"/>
   <div id="mobile-laser" style="position:absolute;top:0;left:-2px;width:1.5px;height:100%;background:linear-gradient(to bottom,transparent,#D42020 50%,transparent);opacity:0;z-index:3;box-shadow:0 0 10px rgba(212,32,32,0.8);pointer-events:none;transition:none"></div>
@@ -490,7 +635,7 @@ footer{background:var(--ink);padding:72px 0 40px}
 </section>
 
 <!-- SERVICES -->
-<section class="services" id="services">
+<section class="services" id="services" aria-label="Our laser and skin treatments">
   <div class="wrap">
     <div class="services-header">
       <div>
@@ -608,10 +753,18 @@ footer{background:var(--ink);padding:72px 0 40px}
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="testi">
+<section class="testi" aria-label="Client testimonials and reviews">
   <div class="wrap">
-    <div class="sec-label rv"><div class="sec-label-line"></div><span class="sec-label-text">Client Stories</span></div>
-    <h2 class="sec-h rv d1">Real <em>Results</em></h2>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:0">
+      <div>
+        <div class="sec-label rv"><div class="sec-label-line"></div><span class="sec-label-text">Client Stories</span></div>
+        <h2 class="sec-h rv d1">Real <em>Results</em></h2>
+      </div>
+      <a class="rv d2" href="https://www.google.com/maps/place/Elite+Laser+Services/@52.1332,-106.6700,17z/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--fire);border-bottom:1px solid var(--fire-b);padding-bottom:4px;transition:gap .3s,border-color .3s;text-decoration:none;margin-bottom:4px" onmouseover="this.style.gap='14px';this.style.borderColor='var(--fire)'" onmouseout="this.style.gap='8px';this.style.borderColor='var(--fire-b)'">
+        See all reviews on Google
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6H10M6 2L10 6L6 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      </a>
+    </div>
     <div class="testi-grid">
       <div class="testi-card rv">
         <span class="testi-qm">"</span>
@@ -639,6 +792,7 @@ footer{background:var(--ink);padding:72px 0 40px}
 <section class="cta">
   <img class="cta-bg-img" src="cta-bg.png" alt=""/>
   <div class="cta-overlay"></div>
+  <div class="cta-light-leak" aria-hidden="true"></div>
   <div class="cta-inner">
     <div class="cta-eyebrow rv"><div class="cta-eyebrow-line"></div><span class="cta-eyebrow-text">Ready to Begin?</span><div class="cta-eyebrow-line"></div></div>
     <h2 class="cta-h rv d1">Ready for your<br/><em>best skin?</em></h2>

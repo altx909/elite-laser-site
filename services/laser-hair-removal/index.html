@@ -42,7 +42,7 @@
   --nav:72px;--g:clamp(20px,5vw,72px);--max:1280px;
 }
 html{font-size:16px;scroll-behavior:smooth}
-body{background:var(--white);color:var(--ink);font-family:var(--fb);font-weight:300;line-height:1.7;overflow-x:hidden;cursor:none}
+body{background:var(--white);color:var(--ink);font-family:var(--fb);font-weight:300;line-height:1.7;overflow-x:hidden;cursor:none;padding-top:var(--nav)}
 img{max-width:100%;display:block}
 a{text-decoration:none;color:inherit}
 button{border:none;background:none;font:inherit;cursor:none}
@@ -53,8 +53,8 @@ button{border:none;background:none;font:inherit;cursor:none}
 #cr{position:fixed;width:28px;height:28px;border:1px solid rgba(232,98,58,0.4);border-radius:50%;pointer-events:none;z-index:9998;left:-200px;top:-200px;transform:translate(-50%,-50%);will-change:left,top}
 
 /* ══ NAV ══ */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:flex;align-items:center;transition:background .4s,box-shadow .4s,border-color .4s}
-nav.sc{background:rgba(253,252,251,0.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);box-shadow:0 1px 24px rgba(26,18,16,0.05)}
+nav{position:fixed;top:0;left:0;right:0;z-index:9100;height:var(--nav);display:flex;align-items:center;background:#FDFCFB;border-bottom:1px solid #EDE5E1;}
+
 @keyframes logopulse{
   0%,100%{box-shadow:0 0 0 0 rgba(232,98,58,0.0)}
   50%{box-shadow:0 0 0 6px rgba(232,98,58,0.18),0 0 16px rgba(232,98,58,0.1)}
@@ -62,7 +62,8 @@ nav.sc{background:rgba(253,252,251,0.96);backdrop-filter:blur(20px);-webkit-back
 
 .ni{width:100%;max-width:var(--max);margin:0 auto;padding:0 var(--g);display:flex;align-items:center;justify-content:space-between}
 .logo{display:flex;align-items:center;gap:12px}
-.logo-mark{width:34px;height:34px;border:1px solid var(--fire);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:logopulse 3s ease-in-out infinite}
+.logo-mark{width:34px;height:34px;border:1px solid var(--fire);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .25s;flex-shrink:0;animation:logopulse 3s ease-in-out infinite}
+.logo-mark:hover{background:var(--fire-l)}
 
 .logo-text{font-family:var(--fd);font-size:18px;font-weight:400;letter-spacing:.06em;color:var(--ink)}
 .nl{display:flex;gap:36px;list-style:none;align-items:center}
@@ -84,14 +85,14 @@ nav.sc{background:rgba(253,252,251,0.96);backdrop-filter:blur(20px);-webkit-back
 .nav-toggle span{display:block;height:1px;background:var(--ink);transition:all .3s}
 
 /* ══ SERVICE NAV STRIP ══ */
-.svc-nav-strip{background:var(--ink);padding:12px var(--g);overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;margin-top:var(--nav);position:relative;z-index:1}
+.svc-nav-strip{background:var(--ink);padding:12px var(--g);overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;position:relative;z-index:1}
 .svc-nav-strip::-webkit-scrollbar{display:none}
 .svc-nav-strip ul{display:flex;gap:0;list-style:none;max-width:var(--max);margin:0 auto}
 .svc-nav-strip a{display:inline-block;padding:8px 20px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);transition:color .2s;white-space:nowrap}
 .svc-nav-strip a:hover,.svc-strip-active{color:var(--fire) !important}
 
 /* ══ BREADCRUMB ══ */
-.breadcrumb{padding:20px var(--g) 0;max-width:var(--max);margin:0 auto}
+.breadcrumb{padding:24px var(--g) 0;max-width:var(--max);margin:0 auto}
 .breadcrumb ol{display:flex;flex-wrap:wrap;gap:8px;list-style:none;font-size:12px;color:var(--muted);letter-spacing:.04em}
 .breadcrumb ol li+li::before{content:'›';margin-right:8px;color:var(--border)}
 .breadcrumb ol li a{color:var(--muted);transition:color .2s}
@@ -354,14 +355,6 @@ footer{background:var(--ink);padding:72px 0 40px}
   </ul>
 </div>
 
-<!-- BREADCRUMB -->
-<nav class="breadcrumb" aria-label="Breadcrumb">
-  <ol>
-    <li><a href="/">Home</a></li>
-    <li><a href="/#services">Services</a></li>
-    <li aria-current="page">Laser Hair Removal</li>
-  </ol>
-</nav>
 
 <!-- HERO -->
 <div class="svc-hero">
@@ -695,6 +688,17 @@ footer{background:var(--ink);padding:72px 0 40px}
   </div>
 </footer>
 
+<!-- LIGHTBOX -->
+<div id="lb" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(26,18,16,0.95);align-items:center;justify-content:center;" aria-modal="true" role="dialog">
+  <button id="lb-close" style="position:absolute;top:20px;right:24px;font-size:32px;color:rgba(255,255,255,0.5);background:none;border:none;cursor:pointer;line-height:1;z-index:2;transition:color .2s" aria-label="Close">&times;</button>
+  <button id="lb-prev" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:36px;color:rgba(255,255,255,0.5);background:none;border:none;cursor:pointer;padding:16px;z-index:2;transition:color .2s" aria-label="Previous">&#8592;</button>
+  <button id="lb-next" style="position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:36px;color:rgba(255,255,255,0.5);background:none;border:none;cursor:pointer;padding:16px;z-index:2;transition:color .2s" aria-label="Next">&#8594;</button>
+  <div style="max-width:90vw;max-height:90vh;position:relative;display:flex;flex-direction:column;align-items:center">
+    <img id="lb-img" src="" alt="" style="max-width:90vw;max-height:85vh;object-fit:contain;display:block;"/>
+    <div id="lb-counter" style="text-align:center;margin-top:14px;font-size:11px;letter-spacing:.16em;color:rgba(255,255,255,0.3);text-transform:uppercase"></div>
+  </div>
+</div>
+
 <script>
 (function(){
 'use strict';
@@ -912,16 +916,5 @@ if('IntersectionObserver' in window){
 
 })();
 </script>
-<!-- LIGHTBOX -->
-<div id="lb" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(26,18,16,0.95);align-items:center;justify-content:center;" aria-modal="true" role="dialog">
-  <button id="lb-close" style="position:absolute;top:20px;right:24px;font-size:28px;color:rgba(255,255,255,0.6);background:none;border:none;cursor:pointer;line-height:1;z-index:2" aria-label="Close">&times;</button>
-  <button id="lb-prev" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:32px;color:rgba(255,255,255,0.5);background:none;border:none;cursor:pointer;padding:12px;z-index:2;transition:color .2s" aria-label="Previous">&#8592;</button>
-  <button id="lb-next" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:32px;color:rgba(255,255,255,0.5);background:none;border:none;cursor:pointer;padding:12px;z-index:2;transition:color .2s" aria-label="Next">&#8594;</button>
-  <div style="max-width:90vw;max-height:90vh;position:relative">
-    <img id="lb-img" src="" alt="" style="max-width:90vw;max-height:85vh;object-fit:contain;display:block;"/>
-    <div id="lb-counter" style="text-align:center;margin-top:12px;font-size:12px;letter-spacing:.12em;color:rgba(255,255,255,0.3);text-transform:uppercase"></div>
-  </div>
-</div>
-
 </body>
 </html>

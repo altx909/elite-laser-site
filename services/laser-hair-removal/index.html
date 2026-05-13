@@ -53,16 +53,20 @@ button{border:none;background:none;font:inherit;cursor:none}
 #cr{position:fixed;width:28px;height:28px;border:1px solid rgba(232,98,58,0.4);border-radius:50%;pointer-events:none;z-index:9998;left:-200px;top:-200px;transform:translate(-50%,-50%);will-change:left,top}
 
 /* ══ NAV ══ */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:flex;align-items:center;background:rgba(253,252,251,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:box-shadow .4s}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:flex;align-items:center;transition:background .4s,box-shadow .4s,border-color .4s}
 nav.sc{background:rgba(253,252,251,0.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);box-shadow:0 1px 24px rgba(26,18,16,0.05)}
+@keyframes logopulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(232,98,58,0.0)}
+  50%{box-shadow:0 0 0 6px rgba(232,98,58,0.18),0 0 16px rgba(232,98,58,0.1)}
+}
 
 .ni{width:100%;max-width:var(--max);margin:0 auto;padding:0 var(--g);display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:10px}
+.logo{display:flex;align-items:center;gap:12px}
 .logo-mark{width:34px;height:34px;border:1px solid var(--fire);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:logopulse 3s ease-in-out infinite}
-@keyframes logopulse{0%,100%{box-shadow:0 0 0 0 rgba(232,98,58,0)}50%{box-shadow:0 0 0 6px rgba(232,98,58,0.18),0 0 16px rgba(232,98,58,0.1)}}
+
 .logo-text{font-family:var(--fd);font-size:18px;font-weight:400;letter-spacing:.06em;color:var(--ink)}
-.nl{display:flex;gap:32px;list-style:none;align-items:center}
-.nl a{font-size:12px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);transition:color .2s;position:relative}
+.nl{display:flex;gap:36px;list-style:none;align-items:center}
+.nl a{font-size:12px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);transition:color .2s;position:relative}
 .nl a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--fire);transition:width .3s var(--ease)}
 .nl a:hover{color:var(--ink)}.nl a:hover::after{width:100%}
 .nl-sep{width:1px;height:14px;background:var(--border);flex-shrink:0;align-self:center}
@@ -232,6 +236,16 @@ footer{background:var(--ink);padding:72px 0 40px}
 .foot-logo-mark{width:34px;height:34px;border:1px solid rgba(232,98,58,0.4);border-radius:50%;display:flex;align-items:center;justify-content:center;animation:logopulse 3s ease-in-out infinite}
 .foot-logo-text{font-family:var(--fd);font-size:18px;font-weight:400;letter-spacing:.06em;color:var(--white)}
 
+/* ══ DEALS ══ */
+.deals-section{padding:clamp(56px,7vw,88px) 0;background:var(--white);border-top:1px solid var(--border)}
+.deals-inner{max-width:var(--max);margin:0 auto;padding:0 var(--g)}
+.deals-header{margin-bottom:40px}
+.deals-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px)}
+.deal-card{overflow:hidden;border:1px solid var(--border);transition:box-shadow .3s,transform .3s}
+.deal-card:hover{box-shadow:0 8px 40px rgba(26,18,16,0.08);transform:translateY(-2px)}
+.deal-card img{width:100%;display:block}
+@media(max-width:640px){.deals-grid{grid-template-columns:1fr}}
+
 /* ══ BEFORE & AFTER ══ */
 .baa-section{background:var(--off);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:clamp(56px,7vw,88px) 0}
 .baa-inner{max-width:var(--max);margin:0 auto;padding:0 var(--g)}
@@ -364,7 +378,7 @@ footer{background:var(--ink);padding:72px 0 40px}
     </div>
   </div>
   <div class="svc-hero-img rv d1">
-    <img src="https://images.unsplash.com/photo-1612354988573-ab2c32b29a94?w=1200&q=85&auto=format&fit=crop" alt="Laser Hair Removal at Elite Laser Services Saskatoon" loading="eager"/>
+    <img src="/images/EL-laser-hair-removal-3.jpg" alt="Laser Hair Removal at Elite Laser Services Saskatoon" loading="eager"/>
     <div class="svc-hero-img-badge">
       <div class="badge-label">SharpLight</div>
       <div class="badge-value">Certified</div>
@@ -409,6 +423,24 @@ footer{background:var(--ink);padding:72px 0 40px}
   </div>
 </div>
 
+<!-- DEALS -->
+<div class="deals-section">
+  <div class="deals-inner">
+    <div class="deals-header rv">
+      <div class="sec-label"><div class="sec-label-line"></div><span class="sec-label-text">Current Offers</span></div>
+      <h2 class="sec-h">Ongoing <em>Deals</em></h2>
+    </div>
+    <div class="deals-grid rv d1">
+      <div class="deal-card">
+        <img src="/images/deal-1.png" alt="Get 2 Free — Purchase 4 treatments at regular price and receive 2 free treatments — Elite Laser Services"/>
+      </div>
+      <div class="deal-card">
+        <img src="/images/deal-2.png" alt="Refer a friend and each get 25% off your next treatment — Elite Laser Services"/>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- MAIN CONTENT -->
 <div class="svc-content">
   <div class="svc-content-inner">
@@ -435,31 +467,31 @@ footer{background:var(--ink);padding:72px 0 40px}
         <h2 class="sec-h">Inside the <em>Clinic</em></h2>
         <p class="body-text" style="margin-bottom:28px">A look at our treatment environment and the precision SharpLight technology behind every session.</p>
         <div class="gallery-grid">
-          <a class="gallery-item gallery-item--wide" href="/images/EL-laser-hair-removal-1.jpg" target="_blank" aria-label="Photo 1">
+          <a class="gallery-item gallery-item--wide" href="#" data-idx="0" aria-label="Photo 1">
             <img src="/images/EL-laser-hair-removal-1.jpg" alt="Laser hair removal treatment — Elite Laser Services Saskatoon" loading="lazy"/>
             <div class="gallery-overlay"><span>View</span></div>
           </a>
-          <a class="gallery-item gallery-item--tall" href="/images/EL-laser-hair-removal-2.jpg" target="_blank" aria-label="Photo 2">
+          <a class="gallery-item gallery-item--tall" href="#" data-idx="1" aria-label="Photo 2">
             <img src="/images/EL-laser-hair-removal-2.jpg" alt="Laser hair removal — Elite Laser Services" loading="lazy"/>
             <div class="gallery-overlay"><span>View</span></div>
           </a>
-          <a class="gallery-item" href="/images/EL-laser-hair-removal-3.jpg" target="_blank" aria-label="Photo 3">
+          <a class="gallery-item" href="#" data-idx="2" aria-label="Photo 3">
             <img src="/images/EL-laser-hair-removal-3.jpg" alt="Laser hair removal — Elite Laser Services" loading="lazy"/>
             <div class="gallery-overlay"><span>View</span></div>
           </a>
-          <a class="gallery-item" href="/images/EL-laser-hair-removal-4.jpg" target="_blank" aria-label="Photo 4">
+          <a class="gallery-item" href="#" data-idx="3" aria-label="Photo 4">
             <img src="/images/EL-laser-hair-removal-4.jpg" alt="SharpLight laser treatment — Elite Laser Services" loading="lazy"/>
             <div class="gallery-overlay"><span>View</span></div>
           </a>
-          <a class="gallery-item" href="/images/EL-laser-hair-removal-5.jpg" target="_blank" aria-label="Photo 5">
+          <a class="gallery-item" href="#" data-idx="4" aria-label="Photo 5">
             <img src="/images/EL-laser-hair-removal-5.jpg" alt="SharpLight laser treatment — Elite Laser Services" loading="lazy"/>
             <div class="gallery-overlay"><span>View</span></div>
           </a>
-          <a class="gallery-item gallery-item--wide" href="/images/EL-laser-hair-removal-6.jpg" target="_blank" aria-label="Photo 6">
+          <a class="gallery-item gallery-item--wide" href="#" data-idx="5" aria-label="Photo 6">
             <img src="/images/EL-laser-hair-removal-6.jpg" alt="Laser clinic — Elite Laser Services Saskatoon" loading="lazy"/>
             <div class="gallery-overlay"><span>View</span></div>
           </a>
-          <a class="gallery-item" href="/images/EL-laser-hair-removal-7.jpg" target="_blank" aria-label="Photo 7">
+          <a class="gallery-item" href="#" data-idx="6" aria-label="Photo 7">
             <img src="/images/EL-laser-hair-removal-7.jpg" alt="Laser clinic — Elite Laser Services Saskatoon" loading="lazy"/>
             <div class="gallery-overlay"><span>View</span></div>
           </a>
@@ -692,25 +724,143 @@ window.addEventListener('scroll',function(){nav.classList.toggle('sc',window.scr
 
 /* ── MOBILE NAV ── */
 var tog=document.getElementById('tog'),nl=document.querySelector('.nl');
+
+function closeMobNav(){
+  nl.style.cssText='';
+  var ob=document.getElementById('mob-brand');if(ob)ob.remove();
+}
+
 if(tog&&nl){
   tog.addEventListener('click',function(){
     var open=nl.style.display==='flex';
     if(open){
-      nl.style.cssText='';
-      var ob=document.getElementById('mob-brand');if(ob)ob.remove();
+      closeMobNav();
     } else {
-      nl.style.cssText='display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:rgba(253,252,251,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:32px 20px 24px;gap:20px;border-bottom:1px solid #EDE5E1;z-index:199;box-shadow:0 8px 32px rgba(26,18,16,0.08)';
-      if(!document.getElementById('mob-brand')){
-        var brand=document.createElement('div');
-        brand.id='mob-brand';
-        brand.style.cssText='padding:16px 0 0;border-top:1px solid #EDE5E1;margin-top:4px;font-size:11px;letter-spacing:.06em;color:#AFA5A0;font-family:DM Sans,sans-serif';
-        brand.innerHTML='Designed by <a href="https://altxmedia.com" target="_blank" rel="noopener" style="font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-weight:400;background:linear-gradient(90deg,#E8623A 0%,#E8623A 30%,#6B7AE8 50%,#E8623A 70%,#E8623A 100%);background-size:300% 100%;background-position:0% 50%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:liquidFire 4s ease-in-out infinite;text-decoration:none">AltX Media<\/a>';
-        nl.appendChild(brand);
+      nl.style.cssText='display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:rgba(253,252,251,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:28px 20px 24px;gap:0;border-bottom:1px solid #EDE5E1;z-index:199;box-shadow:0 8px 32px rgba(26,18,16,0.08);overflow-y:auto;max-height:calc(100svh - 72px)';
+
+      nl.querySelectorAll('.mob-item,.mob-sep-line,#mob-brand').forEach(function(el){el.remove();});
+      nl.querySelectorAll('li').forEach(function(li){li.style.display='none';});
+
+      var mainLinks=[
+        {label:'About',href:'/#about'},
+        {label:'Process',href:'/#process'},
+        {label:'Contact',href:'/#contact'}
+      ];
+      var svcLinks=[
+        {label:'Laser Hair Removal',href:'/services/laser-hair-removal/'},
+        {label:'Tattoo Removal',href:'/services/tattoo-removal/'},
+        {label:'Skin Rejuvenation',href:'/services/skin-rejuvenation/'},
+        {label:'Acne Treatment',href:'/services/acne-treatment/'},
+        {label:'Carbon Correcting Laser Peel',href:'/services/carbon-laser-peel/'},
+        {label:'Facial Contouring',href:'/services/facial-contouring/'},
+        {label:'Body Contouring',href:'/services/body-contouring/'},
+        {label:'Waxing',href:'/services/waxing/'}
+      ];
+
+      function makeRow(label,href,small){
+        var li=document.createElement('li');
+        li.className='mob-item';
+        li.style.cssText='list-style:none;border-bottom:1px solid #EDE5E1;';
+        var a=document.createElement('a');
+        a.href=href;a.textContent=label;
+        a.style.cssText='display:block;padding:14px 0;font-size:'+(small?'12px':'14px')+';letter-spacing:.1em;text-transform:uppercase;font-family:DM Sans,sans-serif;font-weight:'+(small?'300':'400')+';color:#7A6E6A;text-decoration:none;';
+        a.addEventListener('click',function(){closeMobNav();});
+        li.appendChild(a);return li;
       }
+
+      nl.appendChild(makeRow('About','/#about'));
+
+      /* Services expandable */
+      var svcLi=document.createElement('li');
+      svcLi.className='mob-item';
+      svcLi.style.cssText='list-style:none;border-bottom:1px solid #EDE5E1;';
+      var svcBtn=document.createElement('button');
+      svcBtn.style.cssText='width:100%;display:flex;justify-content:space-between;align-items:center;padding:14px 0;font-size:14px;letter-spacing:.1em;text-transform:uppercase;font-family:DM Sans,sans-serif;font-weight:400;color:#7A6E6A;background:none;border:none;cursor:pointer;';
+      svcBtn.innerHTML='Services <span id="svc-arrow" style="font-size:18px;color:#E8623A;transition:transform .3s;display:inline-block">+</span>';
+      var subUl=document.createElement('ul');
+      subUl.style.cssText='display:none;flex-direction:column;padding:0 0 8px 12px;list-style:none;border-top:1px solid #EDE5E1;';
+      svcLinks.forEach(function(s){
+        var li2=document.createElement('li');
+        li2.style.cssText='border-bottom:1px solid rgba(237,229,225,0.5);';
+        var a2=document.createElement('a');
+        a2.href=s.href;a2.textContent=s.label;
+        a2.style.cssText='display:block;padding:11px 0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-family:DM Sans,sans-serif;font-weight:300;color:#AFA5A0;text-decoration:none;transition:color .2s;';
+        a2.addEventListener('mouseenter',function(){this.style.color='#E8623A';});
+        a2.addEventListener('mouseleave',function(){this.style.color='#AFA5A0';});
+        a2.addEventListener('click',function(){closeMobNav();});
+        li2.appendChild(a2);subUl.appendChild(li2);
+      });
+      var svcOpen=false;
+      svcBtn.addEventListener('click',function(){
+        svcOpen=!svcOpen;
+        subUl.style.display=svcOpen?'flex':'none';
+        document.getElementById('svc-arrow').style.transform=svcOpen?'rotate(45deg)':'rotate(0)';
+      });
+      svcLi.appendChild(svcBtn);svcLi.appendChild(subUl);
+      nl.appendChild(svcLi);
+
+      nl.appendChild(makeRow('Process','/#process'));
+      nl.appendChild(makeRow('Contact','/#contact'));
+
+      var sep=document.createElement('li');
+      sep.style.cssText='list-style:none;height:1px;background:#EDE5E1;margin:8px 0;';
+      nl.appendChild(sep);
+      nl.appendChild(makeRow('SRT Barbershop','https://srtbarbershop.com',true));
+      nl.appendChild(makeRow('Hair Products','https://savagehair.ca',true));
+
+      var brand=document.createElement('li');
+      brand.id='mob-brand';
+      brand.style.cssText='list-style:none;padding:20px 0 4px;margin-top:8px;font-size:11px;letter-spacing:.06em;color:#AFA5A0;font-family:DM Sans,sans-serif;';
+      brand.innerHTML='Designed by <a href="https://altxmedia.com" target="_blank" rel="noopener" style="font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-weight:400;background:linear-gradient(90deg,#E8623A 0%,#E8623A 30%,#6B7AE8 50%,#E8623A 70%,#E8623A 100%);background-size:300% 100%;background-position:0% 50%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:liquidFire 4s ease-in-out infinite;text-decoration:none">AltX Media<\/a>';
+      nl.appendChild(brand);
     }
   });
-  nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nl.style.cssText='';var b=document.getElementById('mob-brand');if(b)b.remove();});});
 }
+
+/* ── GALLERY LIGHTBOX ── */
+var lbImgs=[
+  '/images/EL-laser-hair-removal-1.jpg',
+  '/images/EL-laser-hair-removal-2.jpg',
+  '/images/EL-laser-hair-removal-3.jpg',
+  '/images/EL-laser-hair-removal-4.jpg',
+  '/images/EL-laser-hair-removal-5.jpg',
+  '/images/EL-laser-hair-removal-6.jpg',
+  '/images/EL-laser-hair-removal-7.jpg'
+];
+var lb=document.getElementById('lb');
+var lbImg=document.getElementById('lb-img');
+var lbCounter=document.getElementById('lb-counter');
+var lbIdx=0;
+
+function lbShow(idx){
+  lbIdx=(idx+lbImgs.length)%lbImgs.length;
+  lbImg.src=lbImgs[lbIdx];
+  lbCounter.textContent=(lbIdx+1)+' / '+lbImgs.length;
+  lb.style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function lbClose(){
+  lb.style.display='none';
+  document.body.style.overflow='';
+}
+
+document.querySelectorAll('.gallery-item').forEach(function(el){
+  el.addEventListener('click',function(e){
+    e.preventDefault();
+    lbShow(parseInt(el.getAttribute('data-idx')));
+  });
+});
+document.getElementById('lb-close').addEventListener('click',lbClose);
+document.getElementById('lb-prev').addEventListener('click',function(){lbShow(lbIdx-1);});
+document.getElementById('lb-next').addEventListener('click',function(){lbShow(lbIdx+1);});
+lb.addEventListener('click',function(e){if(e.target===lb)lbClose();});
+document.addEventListener('keydown',function(e){
+  if(lb.style.display==='flex'){
+    if(e.key==='ArrowLeft')lbShow(lbIdx-1);
+    if(e.key==='ArrowRight')lbShow(lbIdx+1);
+    if(e.key==='Escape')lbClose();
+  }
+});
 
 /* ── FAQ ACCORDION ── */
 document.querySelectorAll('.faq-q').forEach(function(btn){
@@ -762,5 +912,16 @@ if('IntersectionObserver' in window){
 
 })();
 </script>
+<!-- LIGHTBOX -->
+<div id="lb" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(26,18,16,0.95);align-items:center;justify-content:center;" aria-modal="true" role="dialog">
+  <button id="lb-close" style="position:absolute;top:20px;right:24px;font-size:28px;color:rgba(255,255,255,0.6);background:none;border:none;cursor:pointer;line-height:1;z-index:2" aria-label="Close">&times;</button>
+  <button id="lb-prev" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:32px;color:rgba(255,255,255,0.5);background:none;border:none;cursor:pointer;padding:12px;z-index:2;transition:color .2s" aria-label="Previous">&#8592;</button>
+  <button id="lb-next" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:32px;color:rgba(255,255,255,0.5);background:none;border:none;cursor:pointer;padding:12px;z-index:2;transition:color .2s" aria-label="Next">&#8594;</button>
+  <div style="max-width:90vw;max-height:90vh;position:relative">
+    <img id="lb-img" src="" alt="" style="max-width:90vw;max-height:85vh;object-fit:contain;display:block;"/>
+    <div id="lb-counter" style="text-align:center;margin-top:12px;font-size:12px;letter-spacing:.12em;color:rgba(255,255,255,0.3);text-transform:uppercase"></div>
+  </div>
+</div>
+
 </body>
 </html>

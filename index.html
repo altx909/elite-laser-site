@@ -1169,24 +1169,111 @@ window.addEventListener('scroll',function(){nav.classList.toggle('sc',window.scr
 
 /* ── MOBILE NAV ── */
 var tog=document.getElementById('tog'),nl=document.querySelector('.nl');
+
+function closeMobNav(){
+  nl.style.cssText='';
+  var sub=document.getElementById('mob-svc-sub');if(sub)sub.remove();
+  var ob=document.getElementById('mob-brand');if(ob)ob.remove();
+}
+
 if(tog&&nl){
   tog.addEventListener('click',function(){
     var open=nl.style.display==='flex';
     if(open){
-        nl.style.cssText='';
-        var ob=document.getElementById('mob-brand'); if(ob) ob.remove();
-      } else {
-        nl.style.cssText='display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:rgba(253,252,251,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:36px 20px 80px;gap:24px;border-bottom:1px solid #EDE5E1;z-index:199;box-shadow:0 8px 32px rgba(26,18,16,0.08)';
-        if(!document.getElementById('mob-brand')){
-          var brand=document.createElement('div');
-          brand.id='mob-brand';
-          brand.style.cssText='position:fixed;bottom:0;left:0;right:0;padding:14px 20px;background:rgba(253,252,251,0.98);border-top:1px solid #EDE5E1;z-index:200;text-align:center';
-          brand.innerHTML='<span style="font-size:11px;letter-spacing:.06em;color:#AFA5A0;font-family:DM Sans,sans-serif">Designed by <\/span><a href="https://altxmedia.com" target="_blank" rel="noopener" style="font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-weight:400;background:linear-gradient(90deg,#E8623A 0%,#E8623A 30%,#6B7AE8 50%,#E8623A 70%,#E8623A 100%);background-size:300% 100%;background-position:0% 50%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:liquidFire 4s ease-in-out infinite;text-decoration:none">AltX Media<\/a>';
-          document.body.appendChild(brand);
-        }
+      closeMobNav();
+    } else {
+      nl.style.cssText='display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:rgba(253,252,251,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:28px 20px 24px;gap:0;border-bottom:1px solid #EDE5E1;z-index:199;box-shadow:0 8px 32px rgba(26,18,16,0.08);overflow-y:auto;max-height:calc(100svh - 72px)';
+
+      /* ── rebuild nav items cleanly ── */
+      nl.querySelectorAll('.mob-item,.mob-svc-row,.mob-sub,.mob-sep-line,.mob-sister-row,#mob-brand').forEach(function(el){el.remove();});
+
+      var mainLinks=[
+        {label:'About',href:'#about'},
+        {label:'Process',href:'#process'},
+        {label:'Contact',href:'#contact'}
+      ];
+      var svcLinks=[
+        {label:'Laser Hair Removal',href:'/services/laser-hair-removal/'},
+        {label:'Tattoo Removal',href:'/services/tattoo-removal/'},
+        {label:'Skin Rejuvenation',href:'/services/skin-rejuvenation/'},
+        {label:'Acne Treatment',href:'/services/acne-treatment/'},
+        {label:'Carbon Correcting Laser Peel',href:'/services/carbon-laser-peel/'},
+        {label:'Facial Contouring',href:'/services/facial-contouring/'},
+        {label:'Body Contouring',href:'/services/body-contouring/'},
+        {label:'Waxing',href:'/services/waxing/'}
+      ];
+
+      /* hide original <li> items — we render our own */
+      nl.querySelectorAll('li').forEach(function(li){li.style.display='none';});
+
+      function makeRow(label,href,small){
+        var li=document.createElement('li');
+        li.className='mob-item';
+        li.style.cssText='list-style:none;border-bottom:1px solid #EDE5E1;';
+        var a=document.createElement('a');
+        a.href=href;
+        a.textContent=label;
+        a.style.cssText='display:block;padding:14px 0;font-size:'+(small?'12px':'14px')+';letter-spacing:'+(small?'.08em':'.1em')+';text-transform:uppercase;font-family:DM Sans,sans-serif;font-weight:'+(small?'300':'400')+';color:#7A6E6A;text-decoration:none;';
+        a.addEventListener('click',function(){closeMobNav();});
+        li.appendChild(a);
+        return li;
       }
-    });
-  nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nl.style.cssText='';var b=document.getElementById('mob-brand');if(b)b.remove();});});
+
+      /* About */
+      nl.appendChild(makeRow('About','#about'));
+
+      /* Services — expandable */
+      var svcLi=document.createElement('li');
+      svcLi.className='mob-item';
+      svcLi.style.cssText='list-style:none;border-bottom:1px solid #EDE5E1;';
+      var svcBtn=document.createElement('button');
+      svcBtn.style.cssText='width:100%;display:flex;justify-content:space-between;align-items:center;padding:14px 0;font-size:14px;letter-spacing:.1em;text-transform:uppercase;font-family:DM Sans,sans-serif;font-weight:400;color:#7A6E6A;background:none;border:none;cursor:pointer;';
+      svcBtn.innerHTML='Services <span id="svc-arrow" style="font-size:18px;color:#E8623A;transition:transform .3s;display:inline-block">+</span>';
+      var subUl=document.createElement('ul');
+      subUl.id='mob-svc-sub';
+      subUl.style.cssText='display:none;flex-direction:column;padding:0 0 8px 12px;list-style:none;gap:0;border-top:1px solid #EDE5E1;margin-top:0;';
+      svcLinks.forEach(function(s){
+        var li2=document.createElement('li');
+        li2.style.cssText='border-bottom:1px solid rgba(237,229,225,0.5);';
+        var a2=document.createElement('a');
+        a2.href=s.href;
+        a2.textContent=s.label;
+        a2.style.cssText='display:block;padding:11px 0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-family:DM Sans,sans-serif;font-weight:300;color:#AFA5A0;text-decoration:none;transition:color .2s;';
+        a2.addEventListener('mouseenter',function(){this.style.color='#E8623A';});
+        a2.addEventListener('mouseleave',function(){this.style.color='#AFA5A0';});
+        a2.addEventListener('click',function(){closeMobNav();});
+        li2.appendChild(a2);
+        subUl.appendChild(li2);
+      });
+      var svcOpen=false;
+      svcBtn.addEventListener('click',function(){
+        svcOpen=!svcOpen;
+        subUl.style.display=svcOpen?'flex':'none';
+        document.getElementById('svc-arrow').style.transform=svcOpen?'rotate(45deg)':'rotate(0deg)';
+      });
+      svcLi.appendChild(svcBtn);
+      svcLi.appendChild(subUl);
+      nl.appendChild(svcLi);
+
+      /* Process, Contact */
+      nl.appendChild(makeRow('Process','#process'));
+      nl.appendChild(makeRow('Contact','#contact'));
+
+      /* Sister links separator */
+      var sep=document.createElement('li');
+      sep.style.cssText='list-style:none;height:1px;background:#EDE5E1;margin:8px 0;';
+      nl.appendChild(sep);
+      nl.appendChild(makeRow('SRT Barbershop','https://srtbarbershop.com',true));
+      nl.appendChild(makeRow('Hair Products','https://savagehair.ca',true));
+
+      /* AltX credit — inside drawer at bottom */
+      var brand=document.createElement('li');
+      brand.id='mob-brand';
+      brand.style.cssText='list-style:none;padding:20px 0 4px;margin-top:8px;font-size:11px;letter-spacing:.06em;color:#AFA5A0;font-family:DM Sans,sans-serif;';
+      brand.innerHTML='Designed by <a href="https://altxmedia.com" target="_blank" rel="noopener" style="font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-weight:400;background:linear-gradient(90deg,#E8623A 0%,#E8623A 30%,#6B7AE8 50%,#E8623A 70%,#E8623A 100%);background-size:300% 100%;background-position:0% 50%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:liquidFire 4s ease-in-out infinite;text-decoration:none">AltX Media<\/a>';
+      nl.appendChild(brand);
+    }
+  });
 }
 
 /* ── SMOOTH SCROLL ── */

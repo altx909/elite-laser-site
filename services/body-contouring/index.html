@@ -435,9 +435,23 @@ footer{background:var(--ink);padding:72px 0 40px}
       <!-- VIDEO -->
       <div class="svc-video-wrap rv">
         <div class="sec-label"><div class="sec-label-line"></div><span class="sec-label-text">See It In Action</span></div>
-        <video class="svc-video" autoplay muted loop playsinline aria-label="Body contouring treatment demonstration">
-          <source src="https://elitelaserservice.ca/1964-2-6/" type="video/mp4"/>
-        </video>
+        <div style="position:relative;display:inline-block;width:100%">
+          <video id="bc-video" class="svc-video" autoplay muted loop playsinline controls aria-label="Body contouring treatment demonstration">
+            <source src="/videos/body-contouring.mp4" type="video/mp4"/>
+          </video>
+          <script>
+            (function(){
+              var v=document.getElementById('bc-video');
+              if(v){
+                v.play().catch(function(){
+                  v.muted=true;
+                  v.play();
+                });
+              }
+            })();
+          </script>
+          <button id="bc-unmute" onclick="(function(){var v=document.getElementById('bc-video'),b=document.getElementById('bc-unmute');v.muted=!v.muted;b.textContent=v.muted?'🔇 Tap for sound':'🔊 Mute';})()" style="position:absolute;bottom:16px;right:16px;background:rgba(26,18,16,0.7);color:#fff;border:1px solid rgba(255,255,255,0.3);padding:8px 16px;font-family:DM Sans,sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(8px)">🔇 Tap for sound</button>
+        </div>
       </div>
 
       <!-- GALLERY -->

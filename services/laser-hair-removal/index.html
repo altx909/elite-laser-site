@@ -214,6 +214,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:9100;height:var(--nav);display:f
 .other-svc-card:hover .other-svc-name{color:var(--white)}
 .other-svc-arr{font-size:18px;color:var(--border);transition:color .3s,transform .3s}
 .other-svc-card:hover .other-svc-arr{color:var(--white);transform:translateX(6px)}
+.other-svc-card:last-child{grid-column:1/-1}
 
 /* ══ FOOTER ══ */
 footer{background:var(--ink);padding:72px 0 40px}
@@ -247,6 +248,36 @@ footer{background:var(--ink);padding:72px 0 40px}
 .deal-card img{width:100%;display:block}
 @media(max-width:640px){.deals-grid{grid-template-columns:1fr}}
 
+
+/* ══ PRICING ══ */
+.pricing-section{padding:clamp(60px,8vw,100px) 0;background:var(--off);border-top:1px solid var(--border)}
+.pricing-inner{max-width:var(--max);margin:0 auto;padding:0 var(--g)}
+.pricing-tabs{display:flex;gap:0;border:1px solid var(--border);margin-top:40px;margin-bottom:0}
+.ptab{flex:1;padding:14px;text-align:center;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:var(--white);border:none;cursor:pointer;transition:background .2s,color .2s;font-family:var(--fb)}
+.ptab+.ptab{border-left:1px solid var(--border)}
+.ptab.active{background:var(--ink);color:var(--white)}
+.ptab:hover:not(.active){background:var(--fire-l);color:var(--fire)}
+.pricing-panel{display:none;border:1px solid var(--border);border-top:none;background:var(--white)}
+.pricing-panel.active{display:block}
+.price-table-header{display:grid;grid-template-columns:1fr 80px 80px 80px;gap:0;padding:12px 20px;background:var(--ink);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,0.4)}
+.price-table-header span{text-align:right}
+.price-table-header span:first-child{text-align:left;color:rgba(255,255,255,0.25)}
+.price-row{display:grid;grid-template-columns:1fr 80px 80px 80px;gap:0;padding:13px 20px;border-bottom:1px solid var(--border);font-size:13px;align-items:center;transition:background .2s}
+.price-row:hover{background:var(--fire-l)}
+.price-row:last-child{border-bottom:none}
+.price-name{color:var(--ink);font-weight:400}
+.price-val{text-align:right;color:var(--mid);font-size:13px}
+.price-val.highlight{color:var(--fire);font-family:var(--fd);font-size:15px;font-weight:300}
+.price-group-label{padding:14px 20px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--fire);background:var(--off);border-bottom:1px solid var(--border);user-select:none}
+.price-group-ind{font-size:16px;font-weight:300;color:var(--fire);flex-shrink:0}
+@media(max-width:640px){
+  .price-table-header{grid-template-columns:1fr 60px 60px;font-size:9px}
+  .price-table-header span:last-child{display:none}
+  .price-row{grid-template-columns:1fr 60px 60px;font-size:12px}
+  .price-row .price-val:last-child{display:none}
+  .pricing-tabs{flex-direction:column}
+  .ptab+.ptab{border-left:none;border-top:1px solid var(--border)}
+}
 /* ══ BEFORE & AFTER ══ */
 .baa-section{background:var(--off);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:clamp(56px,7vw,88px) 0}
 .baa-inner{max-width:var(--max);margin:0 auto;padding:0 var(--g)}
@@ -352,6 +383,7 @@ footer{background:var(--ink);padding:72px 0 40px}
     <li><a href="/services/carbon-laser-peel/">Carbon Correcting Laser Peel</a></li>
     <li><a href="/services/facial-contouring/">Facial Contouring</a></li>
     <li><a href="/services/body-contouring/">Body Contouring</a></li>
+    <li><a href="/services/waxing/">Waxing</a></li>
   </ul>
 </div>
 
@@ -415,6 +447,94 @@ footer{background:var(--ink);padding:72px 0 40px}
     </div>
   </div>
 </div>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="pricing-inner">
+    <div class="sec-label rv"><div class="sec-label-line"></div><span class="sec-label-text">Transparent Pricing</span></div>
+    <h2 class="sec-h rv d1">Laser Hair Removal <em>Pricing</em></h2>
+    <p class="body-copy rv d2" style="margin-top:14px;max-width:520px">All prices in CAD. Package pricing available for 6 and 8 sessions — saving up to 40% vs single sessions.</p>
+
+    <div class="pricing-tabs rv d2">
+      <button class="ptab active" onclick="switchTab('women',this)">Women</button>
+      <button class="ptab" onclick="switchTab('men',this)">Men</button>
+    </div>
+
+    <!-- WOMEN -->
+    <div class="pricing-panel active" id="panel-women">
+      <div class="price-table-header">
+        <span>Treatment Area</span><span>1 Session</span><span>6 Sessions</span><span>8 Sessions</span>
+      </div>
+      <div class="price-group-label" data-first="true">Face &amp; Small Areas</div>
+      <div class="price-row"><span class="price-name">Upper Lip</span><span class="price-val">$50</span><span class="price-val">$270</span><span class="price-val highlight">$340</span></div>
+      <div class="price-row"><span class="price-name">Chin</span><span class="price-val">$50</span><span class="price-val">$270</span><span class="price-val highlight">$340</span></div>
+      <div class="price-row"><span class="price-name">Upper Lip &amp; Chin</span><span class="price-val">$85</span><span class="price-val">$459</span><span class="price-val highlight">$578</span></div>
+      <div class="price-row"><span class="price-name">Hair Line</span><span class="price-val">$100</span><span class="price-val">$540</span><span class="price-val highlight">$680</span></div>
+      <div class="price-row"><span class="price-name">Cheeks</span><span class="price-val">$60</span><span class="price-val">$324</span><span class="price-val highlight">$408</span></div>
+      <div class="price-row"><span class="price-name">Sideburns</span><span class="price-val">$60</span><span class="price-val">$324</span><span class="price-val highlight">$408</span></div>
+      <div class="price-row"><span class="price-name">Full Face</span><span class="price-val">$125</span><span class="price-val">$675</span><span class="price-val highlight">$850</span></div>
+      <div class="price-group-label">Body</div>
+      <div class="price-row"><span class="price-name">Underarms</span><span class="price-val">$95</span><span class="price-val">$513</span><span class="price-val highlight">$646</span></div>
+      <div class="price-row"><span class="price-name">Areola</span><span class="price-val">$60</span><span class="price-val">$324</span><span class="price-val highlight">$408</span></div>
+      <div class="price-row"><span class="price-name">Hands &amp; Fingers</span><span class="price-val">$60</span><span class="price-val">$324</span><span class="price-val highlight">$408</span></div>
+      <div class="price-row"><span class="price-name">Feet &amp; Toes</span><span class="price-val">$60</span><span class="price-val">$324</span><span class="price-val highlight">$408</span></div>
+      <div class="price-row"><span class="price-name">Neck</span><span class="price-val">$100</span><span class="price-val">$540</span><span class="price-val highlight">$680</span></div>
+      <div class="price-row"><span class="price-name">Bikini Line</span><span class="price-val">$110</span><span class="price-val">$594</span><span class="price-val highlight">$748</span></div>
+      <div class="price-row"><span class="price-name">Belly Button Line</span><span class="price-val">$75</span><span class="price-val">$405</span><span class="price-val highlight">$510</span></div>
+      <div class="price-row"><span class="price-name">Full Arms</span><span class="price-val">$175</span><span class="price-val">$945</span><span class="price-val highlight">$1,190</span></div>
+      <div class="price-row"><span class="price-name">Half Arms</span><span class="price-val">$130</span><span class="price-val">$702</span><span class="price-val highlight">$884</span></div>
+      <div class="price-row"><span class="price-name">Full Legs</span><span class="price-val">$300</span><span class="price-val">$1,620</span><span class="price-val highlight">$2,040</span></div>
+      <div class="price-row"><span class="price-name">Half Legs</span><span class="price-val">$200</span><span class="price-val">$1,080</span><span class="price-val highlight">$1,360</span></div>
+      <div class="price-row"><span class="price-name">Abdomen</span><span class="price-val">$140</span><span class="price-val">$756</span><span class="price-val highlight">$952</span></div>
+      <div class="price-row"><span class="price-name">Lower Back</span><span class="price-val">$150</span><span class="price-val">$810</span><span class="price-val highlight">$1,020</span></div>
+      <div class="price-row"><span class="price-name">Inner Thighs</span><span class="price-val">$140</span><span class="price-val">$756</span><span class="price-val highlight">$952</span></div>
+      <div class="price-row"><span class="price-name">Buttocks</span><span class="price-val">$150</span><span class="price-val">$810</span><span class="price-val highlight">$1,020</span></div>
+      <div class="price-group-label">Packages</div>
+      <div class="price-row"><span class="price-name">Brazilian</span><span class="price-val">$150</span><span class="price-val">$810</span><span class="price-val highlight">$1,020</span></div>
+      <div class="price-row"><span class="price-name">Full Arms &amp; Underarms</span><span class="price-val">$203</span><span class="price-val">$1,094</span><span class="price-val highlight">$1,377</span></div>
+      <div class="price-row"><span class="price-name">Half Legs &amp; Bikini</span><span class="price-val">$233</span><span class="price-val">$1,256</span><span class="price-val highlight">$1,581</span></div>
+      <div class="price-row"><span class="price-name">Full Legs &amp; Bikini</span><span class="price-val">$308</span><span class="price-val">$1,661</span><span class="price-val highlight">$2,091</span></div>
+      <div class="price-row"><span class="price-name">Half Legs &amp; Brazilian</span><span class="price-val">$263</span><span class="price-val">$1,418</span><span class="price-val highlight">$1,785</span></div>
+      <div class="price-row"><span class="price-name">Full Legs &amp; Brazilian</span><span class="price-val">$338</span><span class="price-val">$1,823</span><span class="price-val highlight">$2,295</span></div>
+      <div class="price-row"><span class="price-name">Bikini &amp; Underarm</span><span class="price-val">$154</span><span class="price-val">$830</span><span class="price-val highlight">$1,046</span></div>
+      <div class="price-row"><span class="price-name">Brazilian &amp; Underarm</span><span class="price-val">$184</span><span class="price-val">$992</span><span class="price-val highlight">$1,250</span></div>
+      <div class="price-row"><span class="price-name">Full Legs, Bikini &amp; Underarm</span><span class="price-val">$379</span><span class="price-val">$2,045</span><span class="price-val highlight">$2,576</span></div>
+      <div class="price-row"><span class="price-name">Half Legs, Bikini &amp; Underarm</span><span class="price-val">$304</span><span class="price-val">$1,640</span><span class="price-val highlight">$2,066</span></div>
+      <div class="price-row"><span class="price-name">Full Legs, Brazilian &amp; Underarm</span><span class="price-val">$409</span><span class="price-val">$2,207</span><span class="price-val highlight">$2,780</span></div>
+      <div class="price-row"><span class="price-name">Half Legs, Brazilian &amp; Underarm</span><span class="price-val">$334</span><span class="price-val">$1,802</span><span class="price-val highlight">$2,270</span></div>
+    </div>
+
+    <!-- MEN -->
+    <div class="pricing-panel" id="panel-men">
+      <div class="price-table-header">
+        <span>Treatment Area</span><span>1 Session</span><span>6 Sessions</span><span>8 Sessions</span>
+      </div>
+      <div class="price-group-label" data-first="true">Face &amp; Neck</div>
+      <div class="price-row"><span class="price-name">Ears</span><span class="price-val">$50</span><span class="price-val">$270</span><span class="price-val highlight">$340</span></div>
+      <div class="price-row"><span class="price-name">Beard Line</span><span class="price-val">$70</span><span class="price-val">$378</span><span class="price-val highlight">$476</span></div>
+      <div class="price-row"><span class="price-name">Nape</span><span class="price-val">$70</span><span class="price-val">$378</span><span class="price-val highlight">$476</span></div>
+      <div class="price-row"><span class="price-name">Neck</span><span class="price-val">$100</span><span class="price-val">$540</span><span class="price-val highlight">$680</span></div>
+      <div class="price-row"><span class="price-name">Neck &amp; Beard Line</span><span class="price-val">$145</span><span class="price-val">$783</span><span class="price-val highlight">$986</span></div>
+      <div class="price-row"><span class="price-name">Upper Cheek</span><span class="price-val">$70</span><span class="price-val">$378</span><span class="price-val highlight">$476</span></div>
+      <div class="price-group-label">Body</div>
+      <div class="price-row"><span class="price-name">Shoulders</span><span class="price-val">$135</span><span class="price-val">$729</span><span class="price-val highlight">$918</span></div>
+      <div class="price-row"><span class="price-name">Underarms</span><span class="price-val">$120</span><span class="price-val">$648</span><span class="price-val highlight">$816</span></div>
+      <div class="price-row"><span class="price-name">Chest</span><span class="price-val">$225</span><span class="price-val">$1,215</span><span class="price-val highlight">$1,530</span></div>
+      <div class="price-row"><span class="price-name">Abs</span><span class="price-val">$120</span><span class="price-val">$648</span><span class="price-val highlight">$816</span></div>
+      <div class="price-row"><span class="price-name">Full Front</span><span class="price-val">$290</span><span class="price-val">$1,566</span><span class="price-val highlight">$1,972</span></div>
+      <div class="price-row"><span class="price-name">Upper Back</span><span class="price-val">$160</span><span class="price-val">$864</span><span class="price-val highlight">$1,088</span></div>
+      <div class="price-row"><span class="price-name">Lower Back</span><span class="price-val">$135</span><span class="price-val">$729</span><span class="price-val highlight">$918</span></div>
+      <div class="price-row"><span class="price-name">Full Back</span><span class="price-val">$275</span><span class="price-val">$1,485</span><span class="price-val highlight">$1,870</span></div>
+      <div class="price-row"><span class="price-name">Buttocks</span><span class="price-val">$175</span><span class="price-val">$945</span><span class="price-val highlight">$1,190</span></div>
+      <div class="price-group-label">Packages</div>
+      <div class="price-row"><span class="price-name">Ears, Jawline &amp; Nape</span><span class="price-val">$161</span><span class="price-val">$871</span><span class="price-val highlight">$1,097</span></div>
+      <div class="price-row"><span class="price-name">Upper Cheek, Ears, Jawline &amp; Nape</span><span class="price-val">$214</span><span class="price-val">$1,154</span><span class="price-val highlight">$1,454</span></div>
+      <div class="price-row"><span class="price-name">Shoulders &amp; Underarms</span><span class="price-val">$191</span><span class="price-val">$1,033</span><span class="price-val highlight">$1,301</span></div>
+      <div class="price-row"><span class="price-name">Full Back &amp; Chest</span><span class="price-val">$375</span><span class="price-val">$2,025</span><span class="price-val highlight">$2,550</span></div>
+      <div class="price-row"><span class="price-name">Full Back &amp; Full Front</span><span class="price-val">$424</span><span class="price-val">$2,288</span><span class="price-val highlight">$2,882</span></div>
+    </div>
+  </div>
+</section>
 
 <!-- DEALS -->
 <div class="deals-section">
@@ -632,6 +752,10 @@ footer{background:var(--ink);padding:72px 0 40px}
         <span class="other-svc-name">Body Contouring</span>
         <span class="other-svc-arr">&rarr;</span>
       </a>
+      <a class="other-svc-card" href="/services/waxing/">
+        <span class="other-svc-name">Waxing</span>
+        <span class="other-svc-arr">&rarr;</span>
+      </a>
     </div>
   </div>
 </section>
@@ -698,6 +822,15 @@ footer{background:var(--ink);padding:72px 0 40px}
     <div id="lb-counter" style="text-align:center;margin-top:14px;font-size:11px;letter-spacing:.16em;color:rgba(255,255,255,0.3);text-transform:uppercase"></div>
   </div>
 </div>
+
+<script>
+function switchTab(tab,btn){
+  document.querySelectorAll('.ptab').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('.pricing-panel').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('panel-'+tab).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
 
 <script>
 (function(){
@@ -914,6 +1047,33 @@ if('IntersectionObserver' in window){
   rvs.forEach(function(el){el.classList.add('vs');});
 }
 
+
+/* ── PRICING ACCORDIONS ── */
+document.querySelectorAll('.price-group-label').forEach(function(label){
+  var isFirst = label.getAttribute('data-first') === 'true';
+  var rows = [];
+  var next = label.nextElementSibling;
+  while(next && !next.classList.contains('price-group-label')){
+    rows.push(next);
+    next = next.nextElementSibling;
+  }
+  // Add toggle indicator
+  var ind = document.createElement('span');
+  ind.className = 'price-group-ind';
+  ind.textContent = isFirst ? '−' : '+';
+  label.appendChild(ind);
+  label.style.cursor = 'pointer';
+  label.style.display = 'flex';
+  label.style.justifyContent = 'space-between';
+  label.style.alignItems = 'center';
+  // Set initial state
+  if(!isFirst){ rows.forEach(function(r){r.style.display='none';}); }
+  label.addEventListener('click', function(){
+    var open = ind.textContent === '−';
+    ind.textContent = open ? '+' : '−';
+    rows.forEach(function(r){ r.style.display = open ? 'none' : ''; });
+  });
+});
 })();
 </script>
 </body>

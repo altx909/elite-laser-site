@@ -919,5 +919,28 @@ if('IntersectionObserver' in window){
 
 })();
 </script>
+<!-- Google Ads click-conversion tracking -->
+<script>
+(function(){
+  // Paste the label from each Google Ads conversion action below.
+  // Format: 'AW-18193457087/xxxxxxxxxxxxxxxxxx'
+  var CONV = {
+    call:       '',  // Phone Calls
+    book:       'AW-18193457087/6GKDCPugqbYcEL-_qOND',  // Book Now (Squire click)
+    directions: ''   // Get Directions
+  };
+  function fire(sendTo){
+    if(!sendTo || typeof gtag !== 'function') return;
+    gtag('event','conversion',{send_to:sendTo});
+  }
+  document.addEventListener('click', function(e){
+    var el = e.target.closest('a,button'); if(!el) return;
+    var href = el.getAttribute('href') || '';
+    if(href.indexOf('tel:') === 0) fire(CONV.call);
+    else if(href.indexOf('getsquire.com') > -1) fire(CONV.book);
+    else if(href.indexOf('google.com/maps') > -1 || href.indexOf('maps.app.goo') > -1) fire(CONV.directions);
+  }, true);
+})();
+</script>
 </body>
 </html>
